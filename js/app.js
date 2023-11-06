@@ -22,5 +22,11 @@ cadastrarDespesa.addEventListener('click',()=>{
     let valor = document.getElementById('valor')
 
     let despesa = new Despesa(ano.value, mês.value, dia.value, tipo.value, descrição.value, valor.value)
-    console.log(despesa);
+   
+    gravar(despesa)
 })
+
+//Função Registro na Memória Local
+function gravar(d) {
+    localStorage.setItem('despesa', JSON.stringify(d))
+}
