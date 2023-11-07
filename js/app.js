@@ -38,6 +38,15 @@ class Despesa{
        this.descrição = descrição
        this.valor = valor
     }
+
+    validarDados(){
+        for (const i in this) {
+            if (this[i] == undefined || this[i] == '' || this[i] == null) {
+                return false
+            }
+            return true
+        }
+    }
 }
 
 //Registrar Nova Despesa
@@ -51,6 +60,13 @@ cadastrarDespesa.addEventListener('click',()=>{
 
     let despesa = new Despesa(ano.value, mês.value, dia.value, tipo.value, descrição.value, valor.value)
    
-    bd.gravar(despesa)
+    if (despesa.validarDados()) {
+        //bd.gravar(despesa)
+        //Dialog Sucesso
+        console.log('Dados válidos');
+    } else {
+        //Dialog Erro
+        console.log('Dados inválidos');
+    }
 })
 
