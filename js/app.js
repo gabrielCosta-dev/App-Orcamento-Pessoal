@@ -63,10 +63,10 @@ cadastrarDespesa.addEventListener('click',()=>{
     if (despesa.validarDados()) {
         //bd.gravar(despesa)
         //Dialog Sucesso
-        console.log('Dados válidos');
+        $('#sucessoGravacao').modal('show')
     } else {
         //Dialog Erro
-        console.log('Dados inválidos');
+        $('#erroGravacao').modal('show')
     }
 })
 
