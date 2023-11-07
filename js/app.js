@@ -1,6 +1,34 @@
 //Variáveis Eventos
 let cadastrarDespesa = document.getElementById('cadastrarDespesa')
 
+//Objetos Dinâmicos
+class Bd{
+    constructor(){
+        let id = localStorage.getItem('id')
+
+        if (id === null) {
+            localStorage.setItem('id', 0)
+        }
+    }
+
+    //Infere um novo índice
+    getPróximoID(){
+        let próximoID = localStorage.getItem('id')
+        return Number(próximoID) + 1
+    }
+
+    //Função Registro na Memória Local
+    gravar(d) {
+        let id = this.getPróximoID()
+
+        localStorage.setItem(id, JSON.stringify(d))
+        
+        localStorage.setItem('id', id)
+    }
+}
+
+let bd = new Bd()
+
 class Despesa{
     constructor(ano, mês, dia, tipo, descrição, valor){
        this.ano = ano 
@@ -23,10 +51,6 @@ cadastrarDespesa.addEventListener('click',()=>{
 
     let despesa = new Despesa(ano.value, mês.value, dia.value, tipo.value, descrição.value, valor.value)
    
-    gravar(despesa)
+    bd.gravar(despesa)
 })
 
-//Função Registro na Memória Local
-function gravar(d) {
-    localStorage.setItem('despesa', JSON.stringify(d))
-}
