@@ -25,6 +25,25 @@ class Bd{
         
         localStorage.setItem('id', id)
     }
+
+    //
+    carregarTodosRegistros(){
+        let lista_despesas = []
+
+        let id = localStorage.getItem('id')
+
+        for(let x = 1; x <= id; x++){
+            let despesa = JSON.parse(localStorage.getItem(x))
+
+            if (despesa === null) {
+                continue
+            }
+
+            lista_despesas.push(despesa)
+        }
+
+        return lista_despesas
+    }
 }
 
 let bd = new Bd()
@@ -66,7 +85,7 @@ cadastrarDespesa.addEventListener('click',()=>{
     let modal_botão = document.querySelector('#modal-button')
    
     if (despesa.validarDados()) {
-        //bd.gravar(despesa)
+        bd.gravar(despesa)
 
         //Dialog Sucesso
         $('#modalRegistraDespesa').modal('show')
@@ -94,4 +113,11 @@ cadastrarDespesa.addEventListener('click',()=>{
 
     }
 })
+
+//Página Consulta
+function carregaListaDespesas() {
+    let lista_despesas = bd.carregarTodosRegistros()
+
+    console.log(lista_despesas);
+}
 
