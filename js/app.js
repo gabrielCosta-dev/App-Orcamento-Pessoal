@@ -66,11 +66,11 @@ cadastrarDespesa.addEventListener('click',()=>{
     let modal_botão = document.querySelector('#modal-button')
    
     if (despesa.validarDados()) {
-        bd.gravar(despesa)
+        //bd.gravar(despesa)
 
         //Dialog Sucesso
         $('#modalRegistraDespesa').modal('show')
-        
+
         //Título
         modal_título.innerHTML = `Registro inserido com sucesso`
         modal_título.className = `text-success`
