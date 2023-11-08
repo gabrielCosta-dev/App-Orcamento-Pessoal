@@ -59,14 +59,39 @@ cadastrarDespesa.addEventListener('click',()=>{
     let valor = document.getElementById('valor')
 
     let despesa = new Despesa(ano.value, mês.value, dia.value, tipo.value, descrição.value, valor.value)
+
+    //Modal
+    let modal_título = document.querySelector('#modal-título')
+    let modal_conteúdo = document.querySelector('#modal-conteúdo')
+    let modal_botão = document.querySelector('#modal-button')
    
     if (despesa.validarDados()) {
-        //bd.gravar(despesa)
+        bd.gravar(despesa)
+
         //Dialog Sucesso
-        $('#sucessoGravacao').modal('show')
+        $('#modalRegistraDespesa').modal('show')
+        
+        //Título
+        modal_título.innerHTML = `Registro inserido com sucesso`
+        modal_título.className = `text-success`
+        //Conteúdo
+        modal_conteúdo.innerHTML = `Despesa foi cadastrada com sucesso!`
+        //Botão
+        modal_botão.innerHTML = `Voltar`
+        modal_botão.className = 'btn btn-success'
     } else {
         //Dialog Erro
-        $('#erroGravacao').modal('show')
+        $('#modalRegistraDespesa').modal('show')
+        
+        //Título
+        modal_título.innerHTML = `Erro na gravação!`
+        modal_título.className = `text-danger`
+        //Conteúdo
+        modal_conteúdo.innerHTML = `Existem campos obrigatórios que não foram preenchidos.`
+        //Botão
+        modal_botão.innerHTML = `Voltar e corrigir`
+        modal_botão.className = `btn btn-danger`
+
     }
 })
 
