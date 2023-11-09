@@ -118,6 +118,6 @@ cadastrarDespesa.addEventListener('click',()=>{
 function carregaListaDespesas() {
     let lista_despesas = bd.carregarTodosRegistros()
 
-    console.log(lista_despesas);
+    document.getElementById('lista-despesas')
 }
 
