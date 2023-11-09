@@ -98,6 +98,9 @@ cadastrarDespesa.addEventListener('click',()=>{
         //Botão
         modal_botão.innerHTML = `Voltar`
         modal_botão.className = 'btn btn-success'
+
+        //Limpando Campos
+        ano.value = ''; mês.value = ''; dia.value = ''; tipo.value = ''; descrição.value = ''; valor.value= ''
     } else {
         //Dialog Erro
         $('#modalRegistraDespesa').modal('show')
@@ -112,12 +115,43 @@ cadastrarDespesa.addEventListener('click',()=>{
         modal_botão.className = `btn btn-danger`
 
     }
+    
 })
 
 //Página Consulta
 function carregaListaDespesas() {
     let lista_despesas = bd.carregarTodosRegistros()
 
-    document.getElementById('lista-despesas')
+    //Tabela De Despesas
+    let tabela = document.getElementById('tabela-despesas')
+    lista_despesas.forEach((d)=>{
+        //TR
+        let linha = tabela.insertRow()
+
+        //TD
+        linha.insertCell(0).innerHTML = `${d.dia}/${d.mês}/${d.ano}`
+
+        //Ajuste Tipo
+        switch (d.tipo) {
+            case '1': d.tipo = 'Alimentação'
+                break;
+            
+            case '2': d.tipo = 'Educação'
+                break;
+
+            case '3': d.tipo = 'Lazer'
+                break;
+
+            case '4': d.tipo = 'Saúde'   
+                break;
+                
+            case '5': d.tipo = 'Transporte' 
+                break;
+        }
+        linha.insertCell(1).innerHTML = `${d.tipo}`
+
+        linha.insertCell(2).innerHTML = `${d.descrição}`
+        linha.insertCell(3).innerHTML = `${d.valor}`
+    })
 }
 
