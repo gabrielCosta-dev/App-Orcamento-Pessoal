@@ -44,6 +44,10 @@ class Bd{
 
         return lista_despesas
     }
+
+    pesquisar(despesa){
+        console.log(despesa);
+    }
 }
 
 let bd = new Bd()
@@ -155,3 +159,17 @@ function carregaListaDespesas() {
     })
 }
 
+
+
+function pesquisar() {
+    let ano = document.getElementById('ano')
+    let mês = document.getElementById('mes')
+    let dia = document.getElementById('dia')
+    let tipo = document.getElementById('tipo')
+    let descrição = document.getElementById('descricao')
+    let valor = document.getElementById('valor')
+
+    let despesa = new Despesa(ano.value, mês.value, dia.value, tipo.value, descrição.value, valor.value)
+
+    bd.pesquisar(despesa)
+}
