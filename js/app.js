@@ -38,10 +38,9 @@ class Bd{
             if (despesa === null) {
                 continue
             }
-
+            despesa.id = x
             lista_despesas.push(despesa)
         }
-
         return lista_despesas
     }
 
@@ -72,6 +71,10 @@ class Bd{
 
         return despesasFiltradas
         
+    }
+
+    remover(id){
+        localStorage.removeItem(id)
     }
 }
 
@@ -159,7 +162,7 @@ function carregaListaDespesas(lista_despesas = [], filtro = false) {
     //Limpeza
     tabela.innerHTML = ''
 
-    lista_despesas.forEach((d)=>{
+    lista_despesas.forEach(d =>{
         //TR
         let linha = tabela.insertRow()
 
@@ -184,9 +187,27 @@ function carregaListaDespesas(lista_despesas = [], filtro = false) {
                 break;
         }
         linha.insertCell(1).innerHTML = `${d.tipo}`
-
         linha.insertCell(2).innerHTML = `${d.descrição}`
         linha.insertCell(3).innerHTML = `${d.valor}`
+
+        //Botão de exclusão
+        let btn = document.createElement('button')
+        btn.id =  `id_despesa_${d.id}`
+        btn.className = 'btn btn-danger'
+        btn.innerHTML = '<i class="fas fa-times">'
+
+        //Remoção da despesa
+        btn.addEventListener('click', ()=>{ 
+            let id = btn.id.replace('id_despesa_', '')
+            bd.remover(id)
+
+            linha.innerHTML = ''
+        })
+
+        //Inserção do botão
+        linha.insertCell(4).appendChild(btn)
+        
+
     })
 }
 
