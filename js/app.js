@@ -1,6 +1,11 @@
 //Variáveis Eventos
 let cadastrarDespesa = document.getElementById('cadastrarDespesa')
 
+//Modal
+let modal_título = document.querySelector('#modal-título')
+let modal_conteúdo = document.querySelector('#modal-conteúdo')
+let modal_botão = document.querySelector('#modal-button')
+
 //Objetos Dinâmicos
 class Bd{
     constructor(){
@@ -110,11 +115,6 @@ cadastrarDespesa.addEventListener('click',()=>{
     let valor = document.getElementById('valor')
 
     let despesa = new Despesa(ano.value, mês.value, dia.value, tipo.value, descrição.value, valor.value)
-
-    //Modal
-    let modal_título = document.querySelector('#modal-título')
-    let modal_conteúdo = document.querySelector('#modal-conteúdo')
-    let modal_botão = document.querySelector('#modal-button')
    
     if (despesa.validarDados()) {
         bd.gravar(despesa)
@@ -200,6 +200,17 @@ function carregaListaDespesas(lista_despesas = [], filtro = false) {
         btn.addEventListener('click', ()=>{ 
             let id = btn.id.replace('id_despesa_', '')
             bd.remover(id)
+
+            $('#modalApagaDespesa').modal('show')
+
+            //Título
+            modal_título.innerHTML = `Registro removido`
+            modal_título.className = `text-info`
+            //Conteúdo
+            modal_conteúdo.innerHTML = `Despesa foi removida com sucesso!`
+            //Botão
+            modal_botão.innerHTML = `Voltar`
+            modal_botão.className = 'btn btn-info'
 
             linha.innerHTML = ''
         })
